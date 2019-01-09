@@ -1,13 +1,13 @@
-//Declare global variables
 var quizQuestions = [
-    {question: "At which local watering hole is Leslie Knope revered for marrying two gay penguins at the Pawnee Zoo?",
+    {question: "Leslie Knope marries two gay penguins at the Pawnee Zoo for publicity. Which local bar celebrates this union?",
     answers: {
       a: "The Glitter Factory",
       b: "The Bulge",
       c: "Tom’s Bistro",
       d: "Snakehole Lounge"
     },
-    correctAnswer: "b"
+    correctAnswer: "b",
+    fullAnswer: "The Bulge",
     },
 
     {question: "Where does April Ludgate get her “lively and colorful” personality from?",
@@ -17,17 +17,19 @@ var quizQuestions = [
       c: "Her Puerto Rican heritage",
       d: "Her fascination with Halloween"
     },
-    correctAnswer: "c"
+    correctAnswer: "c",
+    fullAnswer: "her Puerto Rican heritage",
     },
 
-    {question: "Who does Leslie Knope run against during her City Council race?",
+    {question: "Who does Leslie Knope run against during her Pawnee City Council race?",
     answers: {
       a: "Bobby Newport",
       b: "Denver Newport",
-      c: "James Newporte",
+      c: "James Newport",
       d: "Nick Newport"
     },
-    correctAnswer: "a"
+    correctAnswer: "a",
+    fullAnswer: "Bobby Newport",
     },
 
     {question: "What fictional game does Ben Wyatt invent after “resigning in disgrace”?",
@@ -37,7 +39,8 @@ var quizQuestions = [
       c: "Cones of Dunshire",
       d: "Gryzzl"
     },
-    correctAnswer: "c"
+    correctAnswer: "c",
+    fullAnswer: "Cones of Dunshire",
     },
 
     {question: "How many times does Ron Swanson get married?",
@@ -47,7 +50,8 @@ var quizQuestions = [
       c: "3",
       d: "4"
     },
-    correctAnswer: "d"
+    correctAnswer: "d",
+    fullAnswer: "4",
     },
 
     {question: "Which 90s R&B sensation is Donna Meagle’s cousin?",
@@ -57,7 +61,8 @@ var quizQuestions = [
       c: "Dru Hill",
       d: "Mary J. Blige"
     },
-    correctAnswer: "b"
+    correctAnswer: "b",
+    fullAnswer: "Ginuwine",
     },
 ]
 
@@ -75,7 +80,7 @@ var time;
 function startTimer() {
     if (!isTimerRunning) {
         time = 10; 
-        $("#countdown").text(time); 
+        $("#countdown").text("Time Left: " + time); 
         intervalID = setInterval(count, 1000);
         isTimerRunning = true; 
     }
@@ -88,7 +93,7 @@ function stopTimer() {
 
 function count() {
         time --;
-        $("#countdown").text(time); 
+        $("#countdown").text("Time Left: " + time); 
         if (time === 0) {    
             stopTimer();
             timedOut(); 
@@ -96,70 +101,64 @@ function count() {
 };
 
 function resetQuiz () {
+    console.log("does reset work?")
     correctAnswers = 0;
     incorrectAnswers = 0;
     questionCounter = 0;
     timedOutCounter = 0;
 
-    $(".content").append("<h2>Click Below to Treat Yo' Self to this Quiz!</h2><br><br><button type='button' class='btn btn-warning btn-lg'>Start Now</button>")
+    $(".content").empty();
+    $(".content").append("<h2>Treat Yo' Self to this Quiz!</h2><br><img src='https://media.giphy.com/media/UDnYoVs7GHyU/giphy.gif'><br><br><button type='button' class='btn btn-warning btn-lg'>Start Now</button>")
     $(".btn-warning").on("click", function () {
       $(".content").empty();
       nextQuestion(questionCounter); 
       startTimer();
     });
+
+
+    $(".content").off("click");
+    $(".content").on("click", ".btn-info", function () {      
+      var userGuess = $(this).attr("value");
+      if (userGuess === correctAnswer){
+        correctAnswers++;
+        rightAnswer();
+        stopTimer(); 
+      }
+      else {
+        incorrectAnswers++;
+        wrongAnswer(); 
+        stopTimer(); 
+      }
+    });
 };
 
 function nextQuestion(questionCounter) {
-    $(".content").append("<h3>" + quizQuestions[questionCounter].question + "</h3><br><button type='button' class='btn btn-info' value='a'>" + quizQuestions[questionCounter].answers.a + "</button><br><button type='button' class='btn btn-info' value='b'>" + quizQuestions[questionCounter].answers.b + "</button><br><button type='button' class='btn btn-info' value='c'>" + quizQuestions[questionCounter].answers.c + "</button><br><button type='button' class='btn btn-info' value='d'>" + quizQuestions[questionCounter].answers.d + "</button><br><div id='countdown'>10</div>")
+    $(".content").append("<h3>" + quizQuestions[questionCounter].question + "</h3><br><button type='button' class='btn btn-info' value='a'>" + quizQuestions[questionCounter].answers.a + "</button><br><button type='button' class='btn btn-info' value='b'>" + quizQuestions[questionCounter].answers.b + "</button><br><button type='button' class='btn btn-info' value='c'>" + quizQuestions[questionCounter].answers.c + "</button><br><button type='button' class='btn btn-info' value='d'>" + quizQuestions[questionCounter].answers.d + "</button><br><div id='countdown'></div>")
     checkQuestion(questionCounter);
 };
         
 function checkQuestion(questionCounter) {
-  
   correctAnswer = quizQuestions[questionCounter].correctAnswer
-  console.log(correctAnswer); 
-
-  $(".content").on("click", ".btn-info", function () {
-            
-    var userGuess = $(this).attr("value"); 
-    console.log(userGuess); 
-    
-    if (userGuess === correctAnswer){
-      correctAnswers++;
-      rightAnswer();
-      stopTimer(); 
-    }
-
-    else {
-      incorrectAnswers++;
-      wrongAnswer(); 
-      stopTimer(); 
-    }
-
-  });
 };
 
-function rightAnswer () {
-  
+function rightAnswer () {  
   $(".content").empty();
-  $(".content").append("<h4>Congratulations, the correct answer is " + quizQuestions[questionCounter].correctAnswer + "</h4>");
+  $(".content").append("<h4>Congratulations! The correct answer is " + quizQuestions[questionCounter].fullAnswer + ".</h4><br><br><img src='https://media.giphy.com/media/G8yIJMTsWptuM/giphy.gif' alt=Ron Dancing'>");
   setTimeout(questionReset, 2 * 1000); 
 };
 
 function wrongAnswer () {
-  
   $(".content").empty();
-  $(".content").append("<h4>Incorrect! The right answer is " + quizQuestions[questionCounter].correctAnswer + "</h4>");
+  $(".content").append("<h4>Incorrect. The right answer is " + quizQuestions[questionCounter].fullAnswer + ".</h4><br><br><img src='https://media.giphy.com/media/vy3mYVqIyXpsc/giphy.gif' alt='Nice Try'>");
   setTimeout(questionReset, 2 * 1000); 
 };
 
 function timedOut () {
   incorrectAnswers++;
   $(".content").empty();
-  $(".content").append("<h4>You ran out of time :( The right answer is " + quizQuestions[questionCounter].correctAnswer + "</h4>");
+  $(".content").append("<h4>Times up Jerry! The right answer is " + quizQuestions[questionCounter].fullAnswer + ".</h4><br><br><img src='https://media.giphy.com/media/yRAAHNTBGegNi/giphy.gif' alt='Watch it!'>");
   setTimeout(questionReset, 2 * 1000); 
 };
-
 
 function questionReset() {   
   questionCounter++;
@@ -173,12 +172,10 @@ function questionReset() {
     }
 };
 
-  function gameOver () {
-    $(".content").empty();
-    $(".content").append("<h4>Correct Answers: " + correctAnswers + "</h4><br><h4>Incorrect Answers: " + incorrectAnswers + "</h4><br><br><button type='button' class='btn btn-secondary btn-lg'>Restart Now</button>")
-    $(".content").on("click", ".btn-secondary", function () {
-        startQuiz();
-    });
-  };
-
-
+function gameOver () {
+  $(".content").empty();
+  $(".content").append("<h4>Correct Answers: " + correctAnswers + "</h4><br><h4>Incorrect Answers: " + incorrectAnswers + "</h4><br><button type='button' class='btn btn-primary btn-lg'>Restart Now</button><br><br><img src='https://media.giphy.com/media/DHguk0osZWB7W/giphy.gif' alt='Great idea'>")
+  $(".content").on("click", ".btn-primary", function () {
+    resetQuiz();
+  });
+};

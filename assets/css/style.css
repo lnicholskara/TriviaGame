@@ -21,11 +21,15 @@ body {
     margin-right: auto;
     margin-left: auto;
     padding: 5%;
-    background-image: url("../images/halftone-yellow.png");
+    background-color: whitesmoke;
     text-align: center;
     color: black;
 }
 
 .btn-info {
     margin: 6px;
+}
+
+h2 {
+    font-weight: bold; 
 }
