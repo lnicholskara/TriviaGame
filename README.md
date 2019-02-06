@@ -14,3 +14,10 @@ Users will have 20 seconds to pick the correct answer to each question before ti
 Whether the user gets the question right or wrong, a screen will pop up showing the correct answer and a revelant picture or gif.
 
 At the end of the trivia game, the user's score will be viewable, and there will be a button to reset the game.
+
+### Technologies Used
+* HTML
+* CSS
+* Bootstrap
+* Javascript
+* jQuery
