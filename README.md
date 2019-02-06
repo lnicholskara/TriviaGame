@@ -5,7 +5,7 @@ This is a timed trivia game themed around the TV show "Parks and Recreation."
 ### File
 [`index`](/index.html)
 
-## Link
+### Link
 https://lnicholskara.github.io/TriviaGame/
 
 ### Game Instructions
