@@ -1,7 +1,10 @@
 body {
     font-family: 'Open Sans', sans-serif;
     color: white;
-    background-image: url("../images/background-3512653_1920.jpg");
+    background-image: url("../images/field-of-rapeseeds-474558_1920.jpg");
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
 }
 
 .center {
@@ -21,15 +24,32 @@ body {
     margin-right: auto;
     margin-left: auto;
     padding: 5%;
-    background-color: whitesmoke;
+    background-color: #ecf1f5;
     text-align: center;
-    color: black;
+    color: #434801;
+    box-sizing: border-box;
+    border-radius: 3%;
+}
+
+.header-image {
+    border-radius: 3%;
+}
+
+.start-now {
+    background-color: #fcee08;
 }
 
 .btn-info {
     margin: 6px;
+    background-color: #4d7dd2;
 }
 
 h2 {
     font-weight: bold; 
+}
+
+@media only screen and (max-width: 1280px) {
+    body {
+        background-image: url("../images/field-of-rapeseeds-474558_1280.jpg");
+    }
 }

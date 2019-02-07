@@ -108,8 +108,8 @@ function resetQuiz () {
     timedOutCounter = 0;
 
     $(".content").empty();
-    $(".content").append("<h2>Treat Yo' Self to this Quiz!</h2><br><img src='https://media.giphy.com/media/UDnYoVs7GHyU/giphy.gif'><br><br><button type='button' class='btn btn-warning btn-lg'>Start Now</button>")
-    $(".btn-warning").on("click", function () {
+    $(".content").append("<h2>Treat Yo' Self to this Quiz!</h2><br><img src='https://media.giphy.com/media/UDnYoVs7GHyU/giphy.gif'><br><br><button type='button' class='btn start-now btn-lg shadow-sm'>Start Now</button>")
+    $(".start-now").on("click", function () {
       $(".content").empty();
       nextQuestion(questionCounter); 
       startTimer();
@@ -133,7 +133,7 @@ function resetQuiz () {
 };
 
 function nextQuestion(questionCounter) {
-    $(".content").append("<h3>" + quizQuestions[questionCounter].question + "</h3><br><button type='button' class='btn btn-info' value='a'>" + quizQuestions[questionCounter].answers.a + "</button><br><button type='button' class='btn btn-info' value='b'>" + quizQuestions[questionCounter].answers.b + "</button><br><button type='button' class='btn btn-info' value='c'>" + quizQuestions[questionCounter].answers.c + "</button><br><button type='button' class='btn btn-info' value='d'>" + quizQuestions[questionCounter].answers.d + "</button><br><div id='countdown'></div>")
+    $(".content").append("<h3>" + quizQuestions[questionCounter].question + "</h3><br><button type='button' class='btn btn-info shadow-sm' value='a'>" + quizQuestions[questionCounter].answers.a + "</button><br><button type='button' class='btn btn-info shadow-sm' value='b'>" + quizQuestions[questionCounter].answers.b + "</button><br><button type='button' class='btn btn-info shadow-sm' value='c'>" + quizQuestions[questionCounter].answers.c + "</button><br><button type='button' class='btn btn-info shadow-sm' value='d'>" + quizQuestions[questionCounter].answers.d + "</button><br><div id='countdown'></div>")
     checkQuestion(questionCounter);
 };
         
@@ -156,7 +156,7 @@ function wrongAnswer () {
 function timedOut () {
   incorrectAnswers++;
   $(".content").empty();
-  $(".content").append("<h4>Times up Jerry! The right answer is " + quizQuestions[questionCounter].fullAnswer + ".</h4><br><br><img src='https://media.giphy.com/media/yRAAHNTBGegNi/giphy.gif' alt='Watch it!'>");
+  $(".content").append("<h4>Times up Jerry! The right answer is " + quizQuestions[questionCounter].fullAnswer + ".</h4><br><br><img src='https://media.giphy.com/media/xTZGC0vnEmNDq/giphy.gif' alt='Brush Off'>");
   setTimeout(questionReset, 2 * 1000); 
 };
 
@@ -174,7 +174,7 @@ function questionReset() {
 
 function gameOver () {
   $(".content").empty();
-  $(".content").append("<h4>Correct Answers: " + correctAnswers + "</h4><br><h4>Incorrect Answers: " + incorrectAnswers + "</h4><br><button type='button' class='btn btn-primary btn-lg'>Restart Now</button><br><br><img src='https://media.giphy.com/media/DHguk0osZWB7W/giphy.gif' alt='Great idea'>")
+  $(".content").append("<h4>Correct Answers: " + correctAnswers + "</h4><br><h4>Incorrect Answers: " + incorrectAnswers + "</h4><br><button type='button' class='btn start-now btn-lg shadow-sm'>Restart Now</button><br><br><img src='https://media.giphy.com/media/DHguk0osZWB7W/giphy.gif' alt='Great idea'>")
   $(".content").on("click", ".btn-primary", function () {
     resetQuiz();
   });
