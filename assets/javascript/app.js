@@ -164,7 +164,7 @@ function timedOut () {
   incorrectAnswers++;
   $(".content").empty();
   $(".content").append("<h4>Times up Jerry! The right answer is " + quizQuestions[questionCounter].fullAnswer + 
-    ".</h4><br><br><img src='https://media.giphy.com/media/xTZGC0vnEmNDq/giphy.gif' alt='Brush Off'>");
+    ".</h4><br><br><img src='https://media.giphy.com/media/xTZGC0vnEmNDq/giphy.gif' alt='Brush Off' class='img-fluid'>");
   setTimeout(questionReset, 2 * 1000); 
 };
 
@@ -184,8 +184,9 @@ function gameOver () {
   $(".content").empty();
   $(".content").append("<h4>Correct Answers: " + correctAnswers + 
     "</h4><br><h4>Incorrect Answers: " + incorrectAnswers + 
-    "</h4><br><button type='button' class='btn start-now btn-lg shadow-sm'>Restart Now</button><br><br><img src='https://media.giphy.com/media/DHguk0osZWB7W/giphy.gif' alt='Great idea'>")
-  $(".content").on("click", ".btn-primary", function () {
+    "</h4><br><button type='button' id='restart' class='btn start-now btn-lg shadow-sm'>Restart Now</button><br><br><img src='https://media.giphy.com/media/DHguk0osZWB7W/giphy.gif' alt='Great idea'>")
+  $(document).on("click", "#restart", function () {
+    event.preventDefault();
     resetQuiz();
   });
 };
